@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 
-  
+    public Text scoreText;
+    public Text winText;
     Rigidbody2D rb2d;
     public float speed = 0;
     private int count = 0;
-   
-    
+
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -28,21 +31,29 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("PickUp"))
         {
-            count++; 
+            count++;
             Destroy(collision.gameObject);
-         
+            UpdateScoreText();
 
         }
     }
 
     void UpdateScoreText()
     {
-        
+        scoreText.text = "Wynik: " + count;
+        if (count == 5)
+        {
+            winText.gameObject.SetActive(true);
+            scoreText.gameObject.SetActive(false);
+            StartCoroutine(StopTime());
+            
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator StopTime()
     {
-        
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Level02");
     }
 }
+
