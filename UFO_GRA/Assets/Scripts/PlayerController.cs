@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+  
     Rigidbody2D rb2d;
+    public float speed = 0;
+    private int count = 0;
    
     // Start is called before the first frame update
     void Start()
@@ -18,6 +22,22 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2d.AddForce(movement * 15);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PickUp"))
+        {
+            count++; //zwieksz wartosc o 1
+            Destroy(collision.gameObject);
+         
+
+        }
+    }
+
+    void UpdateScoreText()
+    {
+        
     }
 
     // Update is called once per frame
