@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     private int count = 0;
    
-    // Start is called before the first frame update
+    
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("PickUp"))
         {
-            count++; //zwieksz wartosc o 1
+            count++; 
             Destroy(collision.gameObject);
          
 
